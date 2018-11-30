@@ -25,7 +25,7 @@ class OrderObject :
     protected:		
         
     public:
-        OrderObject( const std::string& p_orderFile ) : 
+        OrderObject( const std::string& p_orderFile ) :
             FileHandler( p_orderFile )
         {
             

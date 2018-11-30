@@ -136,19 +136,14 @@ class Exchange :
             std::pair<MapInsOrderBook::iterator, bool> itR =
                 mOrderBookMap.emplace( order->GetInstrument(), 
                     orderbook );
-                
-            itR.first->second.AddToOrderBook( order.get() );
-            
+                    
             //Time for Matching
-            Matching( order.get() );
+            itR.first->second.SetMatch( order.get() );
+                
+            if( order->GetQuantity() != 0 )
+                itR.first->second.AddToOrderBook( order.get() );
             
             return MenuType::SET_MATCHING;
-        }
-        
-        void Matching( OrderPtr order )
-        {
-            std::cout << "Time to match!" << std::endl;
-            
         }
 
 };

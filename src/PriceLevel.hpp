@@ -34,6 +34,22 @@ class PriceLevel
             mPriceList.push_back( order );
         }
         
+        void SetMatchBuy( OrderPtr order )
+        {
+            long orderQty = order->GetQuantity();
+            
+            for( PriceOrderList::iterator itV = mPriceList.begin();
+                 itV != mPriceList.end();
+                 ++itV )
+            {
+                
+            }
+        }
+        
+        void SetMatchSell( OrderPtr order )
+        {
+        }
+        
         ~PriceLevel()
         {
             //mPriceList.clear();

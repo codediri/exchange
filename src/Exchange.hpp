@@ -138,7 +138,7 @@ class Exchange :
                     orderbook );
                     
             //Time for Matching
-            itR.first->second.SetMatch( order.get() );
+            itR.first->second.SetMatch( order.get(), GetTradeObject() );
                 
             if( order->GetQuantity() != 0 )
                 itR.first->second.AddToOrderBook( order.get() );

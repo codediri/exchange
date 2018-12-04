@@ -47,7 +47,7 @@ class OrderBook :
             itM.first->second.AddPriceLevelOrder( order );
         }
         
-        void SetMatch( OrderPtr order )
+        void SetMatch( OrderPtr order, TradeObject* tradeObj )
         {
             if( order->GetQuantity() > 0 ) // Buy Order
             {
@@ -58,11 +58,11 @@ class OrderBook :
                     // if Buy Price is greater than or equal to iterated 'Sell' price level
                     if( order->GetPrice() >= itM->first ) 
                     {
-                        itM->second.SetMatchBuy( order );
+                        itM->second.SetMatchBuy( order, tradeObj );
                         if( order->GetQuantity() == 0 )
                         {
                             //Matching completed, order was filled
-                            //Add trade in the TradeObject
+                            //Set the order to expired
                             
                             //no need to continue further
                             break;
@@ -84,7 +84,7 @@ class OrderBook :
                     // if Sell Price is lesser than or equal to iterated 'Buy' price level
                     if( order->GetPrice() <= itM->first ) 
                     {
-                        itM->second.SetMatchSell( order );
+                        itM->second.SetMatchSell( order, tradeObj );
                         if( order->GetQuantity() == 0 )
                         {
                             //Matching completed, order was filled

@@ -43,6 +43,9 @@ class Order
         const float& GetPrice() { return mPrice; }
         const OrderType& GetOrderType() { return mOrderType; }
         
+        void SetQuantity( const long& p_quantity ) { mQuantity = p_quantity; }
+        void SetOrderType( OrderType&& p_orderType ) { mOrderType = p_orderType; }
+        
         std::string Print()
         {
             std::string orderStr = GetTraderId() + ":" +

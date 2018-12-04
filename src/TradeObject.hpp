@@ -66,6 +66,11 @@ class TradeObject :
             for( auto & trade : mTradeList )
                 write( trade->Display() );
         }
+        
+        TradeObject* GetTradeObject()
+        {
+            return this;
+        }
 
 };
 

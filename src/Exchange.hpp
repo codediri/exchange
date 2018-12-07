@@ -130,7 +130,7 @@ class Exchange :
                 return MenuType::SET_FAILURE;
             
             //Add the Order to the OrderBook
-            std::cout << "Order Detail: " << order->Print() << std::endl;
+            //std::cout << "Order Detail: " << order->Print() << std::endl;
             OrderBook orderbook( order->GetInstrument() );
             
             std::pair<MapInsOrderBook::iterator, bool> itR =

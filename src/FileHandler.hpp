@@ -27,6 +27,7 @@ class FileHandler
             fileName( p_file )
         {
             fileStream.open( fileName, std::ofstream::trunc );
+            std::cout << "File Opened: " << fileName << std::endl;
         }
         
         ~FileHandler() 
@@ -37,7 +38,7 @@ class FileHandler
         
         const std::string& GetFilename() { return fileName; }
         
-        void write( std::string p_stringLine )
+        void write( std::string&& p_stringLine )
         {
             if ( !fileStream.is_open() )
                 fileStream.open( fileName, std::ofstream::app );

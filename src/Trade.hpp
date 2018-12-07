@@ -67,14 +67,14 @@ class Trade
         const float& GetPrice() { return mPrice; }
         const OrderType& GetOrderType() { return mOrderType; }
         
-        std::string&& Print()
+        std::string Print()
         {
             std::string tradeStr = GetBuyerId() + ":" +
                 GetSellerId() + ":" +
                 GetInstrument() + ":" +
                 std::to_string( GetQuantity() ) + ":" +
                 std::to_string( GetPrice() );
-            return std::move( tradeStr );
+            return tradeStr;
         }
         
         std::string&& Display()

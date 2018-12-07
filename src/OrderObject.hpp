@@ -46,7 +46,7 @@ class OrderObject :
             
             order = mOrderList[ mOrderList.size() - 1 ];
             
-            std::cout << "Order Detail: " << order->Print() << std::endl;
+            //std::cout << "Order Detail: " << order->Print() << std::endl;
             return true;
         }
         

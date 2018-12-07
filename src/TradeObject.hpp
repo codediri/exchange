@@ -49,6 +49,8 @@ class TradeObject :
                     p_price );
                     
             trade->SetMatchId("fsda");
+            
+            //write( trade->Print() );
                     
             mTradeList.push_back( std::move( trade ) );
             

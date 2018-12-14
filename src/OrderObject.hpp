@@ -36,17 +36,16 @@ class OrderObject :
             mOrderList.clear();
         }
         
-        bool AddNewOrder( const std::string& p_orderStr, OrderShd& order )
+        bool AddNewOrder( const std::string& p_orderStr, OrderShd& p_order )
         {            
-            if( !Parse( p_orderStr, order ) ) return false;
+            if( !Parse( p_orderStr, p_order ) ) return false;
             
-            if( !Validate( order ) ) return false;
+            if( !Validate( p_order ) ) return false;
             
-            mOrderList.push_back( std::move(order) );
+            mOrderList.push_back( std::move(p_order) );
             
-            order = mOrderList[ mOrderList.size() - 1 ];
+            p_order = mOrderList[ mOrderList.size() - 1 ];
             
-            //std::cout << "Order Detail: " << order->Print() << std::endl;
             return true;
         }
         
@@ -86,13 +85,18 @@ class OrderObject :
         void PrintOrders()
         {
             for( auto & order : mOrderList )
-                write( order->Print() );
+                if( order->GetQuantity() > 0 )
+                    write( order->Print() );
         }
         
-        void DisplayOrders()
+        const std::string& DisplayOrders()
         {
+            std::string sOrders = "List of Orders: \n";
+            
             for( auto & order : mOrderList )
-                write( order->Print() );
+                sOrders += " * " + order->Display() + "\n";
+            
+            return sOrders;
         }
 
 };

@@ -63,7 +63,7 @@ class OrderBook :
                         {
                             //Matching completed, order was filled
                             //Set the order to expired
-                            order->SetOrderType( OrderType::EXPIRED );
+                            order->SetOrderType( exch::OrderType::EXPIRED );
                             order->SetQuantity(0);
                             
                             //no need to continue further

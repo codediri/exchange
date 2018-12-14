@@ -20,6 +20,7 @@ class TradeObject :
 {
     private:
         std::vector<TradeShd> mTradeList;
+        int counter = 1;
 		
     protected:		
     
@@ -48,7 +49,7 @@ class TradeObject :
                     p_quantity,
                     p_price );
                     
-            trade->SetMatchId("fsda");
+            trade->SetMatchId( exch::CreateId( counter++ ) );
             
             //write( trade->Print() );
                     
@@ -60,13 +61,18 @@ class TradeObject :
         void PrintTrades()
         {
             for( auto & trade : mTradeList )
-                write( trade->Print() );
+                if( trade->GetOrderType() == exch::OrderType::FILLED )
+                    write( trade->Print() );
         }
         
-        void DisplayTrades()
+        const std::string& DisplayTrades()
         {
+            std::string sTrades = "List of Trades: \n";
+            
             for( auto & trade : mTradeList )
-                write( trade->Display() );
+                sTrades += " * " + trade->Display() + "\n";
+            
+            return sTrades;
         }
         
         TradeObject* GetTradeObject()

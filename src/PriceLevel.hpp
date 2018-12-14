@@ -46,50 +46,46 @@ class PriceLevel
                 
                 // Buy Order may still have working quantity or 0,
                 // Sell Order is filled
-                if( orderQty >= 0 )
+                if( orderQty > 0 )
                 {
-                    // Create FILLED trade for the Sell Order
+                    // Fill the Sell Order
                     TradePtr tradeSell = tradeObj->AddTrade(
                         order->GetTraderId(),
                         (*itV)->GetTraderId(),
                         (*itV)->GetInstrument(),
                         labs((*itV)->GetQuantity()),
                         (*itV)->GetPrice() );
-                    tradeSell->SetOrderType( OrderType::FILLED );
+                    tradeSell->SetOrderType( exch::OrderType::FILLED );
                         
                     // Set Order to expired
                     (*itV)->SetQuantity(0);
                 }
-                // Buy Order is filled,
-                // Sell Order still have working quantity
                 else
                 {
-                    // Create PARTIAL_FILLED trade for the Sell Order
-                    /* TradePtr tradeSell = tradeObj->AddTrade(
-                        order->GetTraderId(),
-                        (*itV)->GetTraderId(),
-                        (*itV)->GetInstrument(),
-                        ( orderQty * -1 ),
-                        (*itV)->GetPrice() );
-                    tradeSell->SetOrderType( OrderType::PARTIAL_FILLED ); */
-                    
-                    (*itV)->SetQuantity( orderQty + (*itV)->GetQuantity() );
-                    orderQty = 0;
-                }
-                
-                if( orderQty <= 0 )
-                {
-                    // Create trade for the Buy Order
+                    // Fill the Buy Order
                     TradePtr tradeBuy = tradeObj->AddTrade(
                         order->GetTraderId(),
                         (*itV)->GetTraderId(),
                         (*itV)->GetInstrument(),
-                        order->GetQuantity() - orderQty,
+                        order->GetQuantity(),
                         (*itV)->GetPrice() );
-                    tradeBuy->SetOrderType( OrderType::FILLED );
+                    tradeBuy->SetOrderType( exch::OrderType::FILLED );
+                    
+                    (*itV)->SetQuantity( orderQty );
+                    orderQty = 0;
                 }
                 
                 order->SetQuantity(orderQty);
+                
+                if( order->GetQuantity() > 0 )
+                    order->SetOrderType( exch::OrderType::WORKING );
+                else
+                    order->SetOrderType( exch::OrderType::EXPIRED );
+                
+                if( (*itV)->GetQuantity() < 0 )
+                    (*itV)->SetOrderType( exch::OrderType::WORKING );
+                else
+                    (*itV)->SetOrderType( exch::OrderType::EXPIRED );
                 
                 if( orderQty == 0 )
                     break;
@@ -108,7 +104,7 @@ class PriceLevel
                 
                 // Sell Order may still have working quantity or 0,
                 // Buy Order is filled
-                if( orderQty <= 0 )
+                if( orderQty < 0 )
                 {
                     // Create FILLED trade for the Buy Order
                     TradePtr tradeSell = tradeObj->AddTrade(
@@ -117,41 +113,37 @@ class PriceLevel
                         (*itV)->GetInstrument(),
                         (*itV)->GetQuantity(),
                         (*itV)->GetPrice() );
-                    tradeSell->SetOrderType( OrderType::FILLED );
+                    tradeSell->SetOrderType( exch::OrderType::FILLED );
                         
                     // Set Order to expired
                     (*itV)->SetQuantity(0);
                 }
-                // Sell Order is filled,
-                // Buy Order still have working quantity
                 else
-                {
-                    // Create PARTIAL_FILLED trade for the Sell Order
-                    /* TradePtr tradeSell = tradeObj->AddTrade(
-                        order->GetTraderId(),
-                        (*itV)->GetTraderId(),
-                        (*itV)->GetInstrument(),
-                        orderQty,
-                        (*itV)->GetPrice() );
-                    tradeSell->SetOrderType( OrderType::PARTIAL_FILLED ); */
-                    
-                    (*itV)->SetQuantity( (*itV)->GetQuantity() - orderQty );
-                    orderQty = 0;
-                }
-                    
-                if( orderQty >= 0 )
                 {
                     // Create trade for the Sell Order
                     TradePtr tradeBuy = tradeObj->AddTrade(
-                        order->GetTraderId(),
                         (*itV)->GetTraderId(),
+                        order->GetTraderId(),
                         (*itV)->GetInstrument(),
-                        labs(order->GetQuantity()) - labs(orderQty),
+                        labs(order->GetQuantity()),
                         (*itV)->GetPrice() );
-                    tradeBuy->SetOrderType( OrderType::FILLED );
+                    tradeBuy->SetOrderType( exch::OrderType::FILLED );
+                    
+                    (*itV)->SetQuantity( orderQty );
+                    orderQty = 0;
                 }
                 
                 order->SetQuantity(orderQty);
+                
+                if( order->GetQuantity() < 0 )
+                    order->SetOrderType( exch::OrderType::WORKING );
+                else
+                    order->SetOrderType( exch::OrderType::EXPIRED );
+                
+                if( (*itV)->GetQuantity() > 0 )
+                    (*itV)->SetOrderType( exch::OrderType::WORKING );
+                else
+                    (*itV)->SetOrderType( exch::OrderType::EXPIRED );
                 
                 if( orderQty == 0 )
                     break;

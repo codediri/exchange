@@ -23,7 +23,7 @@ class Trade
         std::string mInstrument;
         long mQuantity;
         float mPrice;
-        OrderType mOrderType;
+        exch::OrderType mOrderType;
 		
     protected:		
         
@@ -54,7 +54,7 @@ class Trade
             mMatchId = p_matchId;
         }
         
-        void SetOrderType( OrderType&& p_orderType )
+        void SetOrderType( exch::OrderType&& p_orderType )
         {
             mOrderType = p_orderType;
         }
@@ -65,7 +65,7 @@ class Trade
         const std::string& GetInstrument() { return mInstrument; }
         const long& GetQuantity() { return mQuantity; }
         const float& GetPrice() { return mPrice; }
-        const OrderType& GetOrderType() { return mOrderType; }
+        const exch::OrderType& GetOrderType() { return mOrderType; }
         
         std::string Print()
         {
@@ -77,11 +77,11 @@ class Trade
             return tradeStr;
         }
         
-        std::string&& Display()
+        std::string Display()
         {
-            std::string tradeStr = GetMatchId() + ":" +
-                Print() + ":" + std::to_string((int)GetOrderType());
-            return std::move( tradeStr );
+            std::string tradeStr = Print() + ":" + 
+                GetMatchId() + ":" + exch::GetOrderTypeStr( GetOrderType() );
+            return tradeStr;
         }
 
 };

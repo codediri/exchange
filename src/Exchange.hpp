@@ -43,16 +43,18 @@ class Exchange :
         
         void Start()
         {
-            MenuType menuT = MenuType::UNKNOWN;
-            while( menuT != MenuType::EXIT )
+            exch::MenuType menuT = exch::MenuType::UNKNOWN;
+            while( menuT != exch::MenuType::EXIT )
             {
                 menuT = Menu();
                 
                 switch( menuT )
                 {
-                    case MenuType::ADD_NEW_ORDER:
+                    case exch::MenuType::ADD_NEW_ORDER:
                         AddOrderDisplay();
-                        
+                        break;
+                    case exch::MenuType::DISPLAY_ORDERS:
+                        DisplayOrdersAndTrades();
                         break;
                 }
             }
@@ -71,7 +73,7 @@ class Exchange :
                     << std::endl;
         }
         
-        MenuType Menu()
+        exch::MenuType Menu()
         {
             std::string choiceS {""};
             int choiceI = 0;
@@ -79,7 +81,8 @@ class Exchange :
             std::cout << "\x1B[2J\x1B[H";
             std::cout << "AE Exchange Demo Program" << std::endl;
             std::cout << "1) Enter Order" << std::endl;
-            std::cout << "2) Exit" << std::endl;
+            std::cout << "2) Display Orders and Trades in console" << std::endl;
+            std::cout << "3) Pint Orders and Trades in files and Exit" << std::endl;
             std::cout << "Choice: " ;
             
             std::cin >> choiceS;
@@ -91,7 +94,17 @@ class Exchange :
               choiceI = 0;
             }
             
-            return (MenuType) choiceI;
+            return (exch::MenuType) choiceI;
+        }
+        
+        void DisplayOrdersAndTrades()
+        {
+            std::cout << DisplayOrders() << std::endl;
+            std::cout << DisplayTrades() << std::endl;
+            
+            std::string key {""};
+            std::cout << std::endl << "Enter any key to go back: ";
+            std::cin >> key;
         }
         
         void AddOrderDisplay()
@@ -100,12 +113,12 @@ class Exchange :
                       << std::endl;
             std::string exitS;
             
-            MenuType menuT = MenuType::UNKNOWN;
+            exch::MenuType menuT = exch::MenuType::UNKNOWN;
             do
             {
                 menuT = AddOrderMenu() ;
                 
-                if( menuT == MenuType::SET_FAILURE )
+                if( menuT == exch::MenuType::SET_FAILURE )
                 {
                     std::cout << "Adding New Order FAILED."
                         << " Please check formatting and Price/Quantity values."
@@ -114,20 +127,20 @@ class Exchange :
                     //continue;
                 }
                 
-            } while( menuT != MenuType::BACK_TO_PREV );
+            } while( menuT != exch::MenuType::BACK_TO_PREV );
         }
         
-        MenuType AddOrderMenu()
+        exch::MenuType AddOrderMenu()
         {
             std::string orderS {""};
             std::cout << std::endl << "Enter New Order or 'x' to go back: ";
             std::cin >> orderS;
             
-            if( orderS == "x" ) return MenuType::BACK_TO_PREV;
+            if( orderS == "x" ) return exch::MenuType::BACK_TO_PREV;
             
             OrderShd order;
             if( !AddNewOrder( orderS, order ) ) 
-                return MenuType::SET_FAILURE;
+                return exch::MenuType::SET_FAILURE;
             
             //Add the Order to the OrderBook
             //std::cout << "Order Detail: " << order->Print() << std::endl;
@@ -143,7 +156,7 @@ class Exchange :
             if( order->GetQuantity() != 0 )
                 itR.first->second.AddToOrderBook( order.get() );
             
-            return MenuType::SET_MATCHING;
+            return exch::MenuType::SET_MATCHING;
         }
 
 };

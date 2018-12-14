@@ -21,7 +21,7 @@ class Order
         std::string mInstrument;
         long mQuantity;
         float mPrice;
-        OrderType mOrderType = OrderType::NEW;
+        exch::OrderType mOrderType = exch::OrderType::NEW;
 		
     protected:		
         
@@ -41,10 +41,10 @@ class Order
         const std::string& GetInstrument() { return mInstrument; }
         const long& GetQuantity() { return mQuantity; }
         const float& GetPrice() { return mPrice; }
-        const OrderType& GetOrderType() { return mOrderType; }
+        const exch::OrderType& GetOrderType() { return mOrderType; }
         
         void SetQuantity( const long& p_quantity ) { mQuantity = p_quantity; }
-        void SetOrderType( OrderType&& p_orderType ) { mOrderType = p_orderType; }
+        void SetOrderType( exch::OrderType&& p_orderType ) { mOrderType = p_orderType; }
         
         std::string Print()
         {
@@ -52,6 +52,13 @@ class Order
                 GetInstrument() + ":" +
                 std::to_string( GetQuantity() ) + ":" +
                 std::to_string( GetPrice() );
+            return orderStr;
+        }
+        
+        std::string Display()
+        {
+            std::string orderStr = Print() + ":" +
+                exch::GetOrderTypeStr( GetOrderType() );
             return orderStr;
         }
         

@@ -1,12 +1,20 @@
 # AE Exchange Demo Program
 
-Version 0.01
+Version 0.02
 
 ## Overview
 
-This is a basic exchange program prototyp
+This is a basic exchange program prototype
 
 ## Building 
 
+To compile:
+1) Go to the 'com' folder
+2) Run 'make app'
+3) A "Exchange" binary will be created in the 'bin' folder.
+
 ## Running the Application
+
+Running the Application will have the following format:
+
 

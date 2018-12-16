@@ -18,10 +18,11 @@
 #include "OrderBook.hpp"
 
 #define _Exchange_NAME_ "Exchange"
-#define _Exchange_VERSION_ "0.1"
+#define _Exchange_VERSION_ "0.2"
 #define _Exchange_DATEMODIFIED_ (__DATE__)
 #define _Exchange_TIMEMODIFIED_ (__TIME__)
 
+// Map Container of Instruments with their working orders (OrderObject)
 using MapInsOrderBook = std::map<std::string, OrderBook>;
 
 class Exchange :
@@ -32,6 +33,7 @@ class Exchange :
         MapInsOrderBook mOrderBookMap;
         
     public:
+        // Constructor
         Exchange( const std::string& p_orderFile, const std::string& p_tradeFile ) :
             OrderObject( p_orderFile ),
             TradeObject( p_tradeFile )
@@ -41,6 +43,7 @@ class Exchange :
         
         ~Exchange() {}
         
+        // Called by the main function, starting point of the program
         void Start()
         {
             exch::MenuType menuT = exch::MenuType::UNKNOWN;

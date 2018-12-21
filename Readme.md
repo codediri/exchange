@@ -63,4 +63,71 @@ The same orders/trades will be printed in the output files given as parameter wh
 Note: Printed output files has lesser detail than in "Displayed Orders and Trades (Menu 2)", e.g. the printed file has no status
 
    
+## Sample Run-Thru
+
+[***** bin]$ ./Exchange orders.txt trades.txt
+
+AE Exchange Demo Program
+1) Enter Order
+2) Display Orders and Trades in console
+3) Print Orders and Trades in files and Exit
+Choice: 1
+Order Format: <buyer/sellerid>:<instrument>:<signedquantity>:<limitprice>
+
+Enter New Order or 'x' to go back: A:GBPUSD:100:1.66
+
+Enter New Order or 'x' to go back: B:EURUSD:-100:1.11
+
+Enter New Order or 'x' to go back: F:EURUSD:-50:1.1
+
+Enter New Order or 'x' to go back: C:GBPUSD:-10:1.5
+
+Enter New Order or 'x' to go back: C:GBPUSD:-20:1.6
+
+Enter New Order or 'x' to go back: C:GBPUSD:-20:1.7
+
+Enter New Order or 'x' to go back: D:EURUSD:100:1.11
+
+Enter New Order or 'x' to go back: x
+AE Exchange Demo Program
+1) Enter Order
+2) Display Orders and Trades in console
+3) Pint Orders and Trades in files and Exit
+Choice: 2
+List of Orders:
+ * A:GBPUSD:70:1.660000:WORKING
+ * B:EURUSD:-50:1.110000:WORKING
+ * F:EURUSD:0:1.100000:EXPIRED
+ * C:GBPUSD:0:1.500000:EXPIRED
+ * C:GBPUSD:0:1.600000:EXPIRED
+ * C:GBPUSD:-20:1.700000:NEW
+ * D:EURUSD:0:1.110000:EXPIRED
+
+List of Trades:
+ * A:C:GBPUSD:10:1.660000:15453732911:FILLED
+ * A:C:GBPUSD:20:1.660000:15453732942:FILLED
+ * D:F:EURUSD:50:1.100000:15453733033:FILLED
+ * D:B:EURUSD:50:1.110000:15453733034:FILLED
+
+
+Enter any key to go back: x
+
+AE Exchange Demo Program
+1) Enter Order
+2) Display Orders and Trades in console
+3) Pint Orders and Trades in files and Exit
+Choice: 3
+
+Please check the output files 'orders.txt' and 'trades.txt'. Goodbye!
+[***** bin]$ cat orders.txt
+A:GBPUSD:70:1.660000
+B:EURUSD:-50:1.110000
+C:GBPUSD:-20:1.700000
+[***** bin]$ cat trades.txt
+A:C:GBPUSD:10:1.660000
+A:C:GBPUSD:20:1.660000
+D:F:EURUSD:50:1.100000
+D:B:EURUSD:50:1.110000
+[***** bin]$
+
 

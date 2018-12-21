@@ -18,7 +18,7 @@
 #include "OrderBook.hpp"
 
 #define _Exchange_NAME_ "Exchange"
-#define _Exchange_VERSION_ "0.2"
+#define _Exchange_VERSION_ "0.3"
 #define _Exchange_DATEMODIFIED_ (__DATE__)
 #define _Exchange_TIMEMODIFIED_ (__TIME__)
 

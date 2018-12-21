@@ -1,7 +1,6 @@
 LOCAL_COM = ../com
 LOCAL_LIB = ../lib
 LOCAL_SRC = ../src
-LOCAL_INC = ../inc
 LOCAL_BIN = ../bin
 
 SYS_LIB = /usr/local/lib
@@ -34,7 +33,7 @@ $(SBAPP_BINARY): $(OBJECTS)
 	rm -f $(LOCAL_SRC)/*.o rm -f $(LOCAL_SRC)/*.d
 
 %.o: %.cc
-	$(SBAPP_COMPILE) $< $(COMPILEFLAGS) $(foreach LOC_INC,$(LOCAL_INC),-I$(LOC_INC)) -o $@
+	$(SBAPP_COMPILE) $< $(COMPILEFLAGS) -o $@
    
 clean:
 	rm -f $(LOCAL_BIN)/$(SBAPP_BINARY) $(LOCAL_BIN)/$(SBAPP_BINARY)_debug

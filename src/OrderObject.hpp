@@ -85,11 +85,11 @@ class OrderObject :
         void PrintOrders()
         {
             for( auto & order : mOrderList )
-                if( order->GetQuantity() > 0 )
+                if( order->GetQuantity() != 0 )
                     write( order->Print() );
         }
         
-        const std::string& DisplayOrders()
+        std::string DisplayOrders()
         {
             std::string sOrders = "List of Orders: \n";
             

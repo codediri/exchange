@@ -27,7 +27,7 @@ class FileHandler
             fileName( p_file )
         {
             fileStream.open( fileName, std::ofstream::trunc );
-            std::cout << "File Opened: " << fileName << std::endl;
+            //std::cout << "File Opened: " << fileName << std::endl;
         }
         
         ~FileHandler() 

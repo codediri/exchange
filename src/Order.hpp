@@ -48,7 +48,7 @@ class Order
         
         std::string Print()
         {
-            std::string orderStr = GetTraderId() + ":" +
+            auto orderStr = GetTraderId() + ":" +
                 GetInstrument() + ":" +
                 std::to_string( GetQuantity() ) + ":" +
                 std::to_string( GetPrice() );
@@ -57,7 +57,7 @@ class Order
         
         std::string Display()
         {
-            std::string orderStr = Print() + ":" +
+            auto orderStr = Print() + ":" +
                 exch::GetOrderTypeStr( GetOrderType() );
             return orderStr;
         }

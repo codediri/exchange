@@ -85,7 +85,7 @@ class Exchange :
             std::cout << "AE Exchange Demo Program" << std::endl;
             std::cout << "1) Enter Order" << std::endl;
             std::cout << "2) Display Orders and Trades in console" << std::endl;
-            std::cout << "3) Pint Orders and Trades in files and Exit" << std::endl;
+            std::cout << "3) Print Orders and Trades in files and Exit" << std::endl;
             std::cout << "Choice: " ;
             
             std::cin >> choiceS;

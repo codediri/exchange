@@ -122,9 +122,7 @@ Please check the output files 'orders.txt' and 'trades.txt'. Goodbye!
 
 [***** bin]$ cat orders.txt
 A:GBPUSD:70:1.660000
-
 B:EURUSD:-50:1.110000
-
 C:GBPUSD:-20:1.700000 
 
 [***** bin]$ cat trades.txt
@@ -132,6 +130,7 @@ A:C:GBPUSD:10:1.660000
 A:C:GBPUSD:20:1.660000 
 D:F:EURUSD:50:1.100000 
 D:B:EURUSD:50:1.110000 
+
 [***** bin]$
 
 
